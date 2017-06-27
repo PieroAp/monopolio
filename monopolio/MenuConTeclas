@@ -1,0 +1,98 @@
+#include <iostream>
+#include <conio2.h>
+#include <windows.h>
+#include "nombreMonopolio.h"
+
+#define TECLA_ARRIBA 72
+#define TECLA_ABAJO 80
+#define ENTER 13
+
+using namespace std;
+int menu(const char *titulo, const char *opciones[],int n);
+
+
+
+void CrearMenu ()
+{
+
+    bool repite = true;
+    int opcion;
+
+    const char *titulo = "Menu Principal";
+    const char *opciones[]={"Iniciar", "Instrucciones", "Opciones","Creditos","Salir"};
+    int n = 5; //Número de opciones
+    do
+    {
+    opcion = menu(titulo,opciones,n);
+
+    switch(opcion)
+        {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 0:
+                repite = false;
+                break;
+        }
+
+    }while(repite);
+}
+
+int menu(const char *titulo, const char *opciones[],int n)
+{
+    int OpcionSeleccionada = 1;
+    int tecla;
+    bool repite = true;
+
+    do{
+        system("cls");
+
+        gotoxy(25,3+OpcionSeleccionada);cout<<"==>";
+
+        gotoxy(28,2); cout<<titulo;
+
+        for(int i = 0; i < n; i++){
+            gotoxy(30,4 + i); cout<< i + 1<< ")" <<opciones[i];
+        }
+
+        do{
+            tecla = getch();
+        } while(tecla!= TECLA_ARRIBA && tecla!= TECLA_ABAJO && tecla!= ENTER);
+
+        switch(tecla){
+            case TECLA_ARRIBA:
+                OpcionSeleccionada--;
+
+                if(OpcionSeleccionada < 1)
+                {
+                    OpcionSeleccionada = n;
+                }
+                break;
+            case TECLA_ABAJO:
+                OpcionSeleccionada++;
+                 if(OpcionSeleccionada > n)
+                {
+                    OpcionSeleccionada = 1;
+                }
+                break;
+            case ENTER:
+                repite = false;
+                break;
+        }
+
+    }while(repite);
+
+
+    return OpcionSeleccionada;
+}
+
+int main ()
+{
+
+    CrearMenu();
+}
